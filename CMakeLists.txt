@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.23)
 project(gamut_viewer)
 
+add_compile_options(/W4 /WX)
+add_link_options(/ignore:4099)
+
 find_package(Catch2 REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(imgui REQUIRED)
