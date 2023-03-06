@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 3.23)
 project(gamut_viewer)
 
-add_compile_options(/W4 /WX)
-add_link_options(/ignore:4099)
+if(MSVC)
+	add_compile_options(/W4 /WX /std:c++latest)
+	add_link_options(/ignore:4099)
+else()
+	add_compile_options(-std=c++23)
+endif()
 
 find_package(Catch2 REQUIRED)
 find_package(glfw3 REQUIRED)
@@ -31,13 +35,13 @@ target_sources(glad
 	PRIVATE
 		glad/glad.c)
 
-add_executable(viewer gamut_viewer/window.cpp gamut_viewer/window.hpp)
+add_executable(viewer gamut_viewer/window.cpp gamut_viewer/window.hpp gamut_viewer/shader_c.cpp gamut_viewer/shader_c.hpp gamut_viewer/main.cpp)
 target_sources(viewer
-	PRIVATE
-		gamut_viewer/main.cpp)
+	PRIVATE)
 target_link_libraries(viewer
 	PRIVATE
 		imgui_opengl3_glfw
+		imgui::imgui
 		glad)
 
 add_executable(viewer_tests)
