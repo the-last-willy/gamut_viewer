@@ -9,7 +9,9 @@ class GamutViewerRecipe(ConanFile):
     def requirements(self):
         self.requires('catch2/3.3.1')
         self.requires('glfw/3.3.8')
+        self.requires('glm/cci.20230113')
         self.requires('imgui/cci.20230105+1.89.2.docking')
+        self.requires('stb/cci.20220909')
 
     def generate(self):
         imgui = self.dependencies['imgui/cci.20230105+1.89.2.docking']
